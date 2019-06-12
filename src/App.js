@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [boxCount, setBoxCount] = useState(0);
+
+  const addBox = () => {
+    setBoxCount(boxCount + 1);
+  };
+
+  const removeLastBox = () => {
+    if (boxCount > 0) {
+      setBoxCount(boxCount - 1);
+    }
+  };
+
+  const boxesArray = [...Array(boxCount).fill(true)];
+
+  const boxesList = boxesArray.map((_, i) => (
+    <CSSTransition key={i} timeout={400} classNames="t-box">
+      <div className="box">X</div>
+    </CSSTransition>
+  ));
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <button onClick={() => addBox()}>Add Boxes</button>
+        <button onClick={() => removeLastBox()}>Remove Last Box</button>
+
+        <TransitionGroup>{boxesList}</TransitionGroup>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
