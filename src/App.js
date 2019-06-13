@@ -19,17 +19,24 @@ const App = () => {
 
   const boxesList = boxesArray.map((_, i) => (
     <CSSTransition key={i} timeout={400} classNames="t-box">
-      <div className="box">X</div>
+      <div className="box" />
     </CSSTransition>
   ));
 
   return (
     <div className="App">
-      <div>
-        <button onClick={() => addBox()}>Add Boxes</button>
-        <button onClick={() => removeLastBox()}>Remove Last Box</button>
-
-        <TransitionGroup>{boxesList}</TransitionGroup>
+      <button onClick={() => addBox()}>Add Boxes</button>
+      <button onClick={() => removeLastBox()}>Remove Last Box</button>
+      <div className="columns">
+        <div className="box-grid">
+          <TransitionGroup component={null}>{boxesList}</TransitionGroup>
+        </div>
+        <div className="box-grid">
+          <TransitionGroup component={null}>{boxesList}</TransitionGroup>
+        </div>
+        <div className="box-grid">
+          <TransitionGroup component={null}>{boxesList}</TransitionGroup>
+        </div>
       </div>
     </div>
   );
